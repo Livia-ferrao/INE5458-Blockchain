@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SciQuipShar - Catalog</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* Header */
+      .header {
+        background: white;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #28a745;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: #666;
+        font-weight: 500;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: #28a745;
+      }
+
+      /* Main Container */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .page-title {
+        text-align: center;
+        font-size: 3rem;
+        color: #28a745;
+        margin-bottom: 3rem;
+        font-weight: 300;
+      }
+
+      /* Section Headers */
+      .section-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .section-indicator {
+        width: 4px;
+        height: 24px;
+        background: #28a745;
+        margin-right: 1rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #333;
+      }
+
+      /* Categories Section */
+      .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-bottom: 3rem;
+      }
+
+      .category-card {
+        background: white;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        padding: 2rem 1rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .category-card:hover {
+        border-color: #28a745;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .category-card.active {
+        background: #28a745;
+        color: white;
+        border-color: #28a745;
+      }
+
+      .category-icon {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto 1rem;
+        background: #f8f9fa;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+      }
+
+      .category-card.active .category-icon {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      /* Search Section */
+      .search-container {
+        margin-bottom: 2rem;
+      }
+
+      .search-box {
+        display: flex;
+        max-width: 400px;
+        background: white;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .search-box input {
+        flex: 1;
+        padding: 12px 16px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+      }
+
+      .search-box button {
+        padding: 12px 16px;
+        background: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      /* Equipment Grid */
+      .equipment-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .equipment-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .equipment-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      }
+
+      .equipment-image {
+        width: 100%;
+        height: 200px;
+        background: #f8f9fa;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .equipment-image img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+      }
+
+      .status-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .status-available {
+        background: #28a745;
+        color: white;
+      }
+
+      .status-unavailable {
+        background: #dc3545;
+        color: white;
+      }
+
+      .status-perfect {
+        background: #28a745;
+        color: white;
+      }
+
+      .equipment-actions {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .action-btn {
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s ease;
+      }
+
+      .action-btn:hover {
+        background: white;
+        transform: scale(1.1);
+      }
+
+      .equipment-info {
+        padding: 1.5rem;
+      }
+
+      .equipment-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .equipment-price {
+        color: #28a745;
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      /* View All Button */
+      .view-all-btn {
+        display: block;
+        margin: 3rem auto 0;
+        padding: 12px 32px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .view-all-btn:hover {
+        background: #218838;
+      }
+
+      /* Navigation Arrows */
+      .nav-arrows {
+        display: flex;
+        gap: 1rem;
+        margin-left: auto;
+      }
+
+      .nav-arrow {
+        width: 40px;
+        height: 40px;
+        background: white;
+        border: 2px solid #e9ecef;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .nav-arrow:hover {
+        border-color: #28a745;
+        color: #28a745;
+      }
+
+      .section-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">SciQuipShar</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="catalogo.html" class="active">Catalog</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="dashboard.html">My dashboard</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      <h1 class="page-title">Catalog</h1>
+
+      <!-- Categories Section -->
+      <div class="section-row">
+        <div class="section-header">
+          <div class="section-indicator"></div>
+          <h2 class="section-title">Categories</h2>
+        </div>
+        <div class="nav-arrows">
+          <button class="nav-arrow">←</button>
+          <button class="nav-arrow">→</button>
+        </div>
+      </div>
+
+      <section class="categories-section">
+        <h3 class="section-subtitle">Browse By Category</h3>
+        <div class="categories-grid">
+          <div class="category-card">
+            <div class="category-icon">📐</div>
+            <div>Mathematics</div>
+          </div>
+          <div class="category-card active">
+            <div class="category-icon">💻</div>
+            <div>Computing</div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon">⚛️</div>
+            <div>Science</div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon">🌍</div>
+            <div>Geography</div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon">⚙️</div>
+            <div>Engineering</div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon">🔬</div>
+            <div>Physical</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Equipment Section -->
+      <div class="section-row">
+        <div class="section-header">
+          <div class="section-indicator"></div>
+          <h2 class="section-title">Equipments</h2>
+        </div>
+        <div class="nav-arrows">
+          <button class="nav-arrow">←</button>
+          <button class="nav-arrow">→</button>
+        </div>
+      </div>
+
+      <section class="equipment-section">
+        <h3 class="section-subtitle">Browse By Search</h3>
+        <div class="search-container">
+          <div class="search-box">
+            <input type="text" placeholder="What are you looking for?" />
+            <button type="submit">🔍</button>
+          </div>
+        </div>
+
+        <div class="equipment-grid">
+          <div class="equipment-card">
+            <div class="equipment-image">
+              <div class="status-badge status-available">Available</div>
+              <div class="equipment-actions">
+                <button class="action-btn">❤️</button>
+                <button class="action-btn">👁️</button>
+              </div>
+              <div
+                style="
+                  width: 80%;
+                  height: 120px;
+                  background: #333;
+                  border-radius: 8px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                "
+              >
+                Network Analyzer
+              </div>
+            </div>
+            <div class="equipment-info">
+              <div class="equipment-name">Keysight N9045B Network Analyzer</div>
+              <div class="equipment-price">0.34 ETH / day</div>
+            </div>
+          </div>
+
+          <div class="equipment-card">
+            <div class="equipment-image">
+              <div class="status-badge status-unavailable">Not available</div>
+              <div class="equipment-actions">
+                <button class="action-btn">❤️</button>
+                <button class="action-btn">👁️</button>
+              </div>
+              <div
+                style="
+                  width: 80%;
+                  height: 120px;
+                  background: #f4c430;
+                  border-radius: 8px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: black;
+                  font-weight: bold;
+                "
+              >
+                NVIDIA DGX
+              </div>
+            </div>
+            <div class="equipment-info">
+              <div class="equipment-name">NVIDIA DGX A100 Server</div>
+              <div class="equipment-price">0.54 ETH / day</div>
+            </div>
+          </div>
+
+          <div class="equipment-card">
+            <div class="equipment-image">
+              <div class="equipment-actions">
+                <button class="action-btn">❤️</button>
+                <button class="action-btn">👁️</button>
+              </div>
+              <div
+                style="
+                  width: 80%;
+                  height: 120px;
+                  background: #e8e8e8;
+                  border: 2px solid #ccc;
+                  border-radius: 8px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #666;
+                "
+              >
+                HPE Apollo
+              </div>
+            </div>
+            <div class="equipment-info">
+              <div class="equipment-name">HPE Apollo 6500 Cluster</div>
+              <div class="equipment-price">0.71 ETH / day</div>
+            </div>
+          </div>
+
+          <div class="equipment-card">
+            <div class="equipment-image">
+              <div class="equipment-actions">
+                <button class="action-btn">❤️</button>
+                <button class="action-btn">👁️</button>
+              </div>
+              <div
+                style="
+                  width: 80%;
+                  height: 120px;
+                  background: #2c3e50;
+                  border-radius: 8px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                "
+              >
+                Dell Workstation
+              </div>
+            </div>
+            <div class="equipment-info">
+              <div class="equipment-name">Dell Precision 7865 Workstation</div>
+              <div class="equipment-price">0.023 ETH / day</div>
+            </div>
+          </div>
+
+          <div class="equipment-card">
+            <div class="equipment-image">
+              <div class="equipment-actions">
+                <button class="action-btn">❤️</button>
+                <button class="action-btn">👁️</button>
+              </div>
+              <div
+                style="
+                  width: 80%;
+                  height: 120px;
+                  background: #34495e;
+                  border-radius: 8px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                "
+              >
+                Storage System
+              </div>
+            </div>
+            <div class="equipment-info">
+              <div class="equipment-name">DDN EXAScaler Storage System</div>
+              <div class="equipment-price">0.43 ETH / day</div>
+            </div>
+          </div>
+
+          <div class="equipment-card">
+            <div class="equipment-image">
+              <div class="status-badge status-perfect">Perfect</div>
+              <div class="equipment-actions">
+                <button class="action-btn">❤️</button>
+                <button class="action-btn">👁️</button>
+              </div>
+              <div
+                style="
+                  width: 80%;
+                  height: 120px;
+                  background: #2c3e50;
+                  border-radius: 8px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                "
+              >
+                NVIDIA Jetson
+              </div>
+            </div>
+            <div class="equipment-info">
+              <div class="equipment-name">
+                NVIDIA Jetson AGX Orin Development Kit
+              </div>
+              <div class="equipment-price">0.0057 ETH / day</div>
+            </div>
+          </div>
+
+          <div class="equipment-card">
+            <div class="equipment-image">
+              <div class="equipment-actions">
+                <button class="action-btn">❤️</button>
+                <button class="action-btn">👁️</button>
+              </div>
+              <div
+                style="
+                  width: 80%;
+                  height: 120px;
+                  background: #e67e22;
+                  border-radius: 8px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                "
+              >
+                3D Printer
+              </div>
+            </div>
+            <div class="equipment-info">
+              <div class="equipment-name">Formlabs Form 3L 3D Printer</div>
+              <div class="equipment-price">0.031 ETH / day</div>
+            </div>
+          </div>
+
+          <div class="equipment-card">
+            <div class="equipment-image">
+              <div class="equipment-actions">
+                <button class="action-btn">❤️</button>
+                <button class="action-btn">👁️</button>
+              </div>
+              <div
+                style="
+                  width: 80%;
+                  height: 120px;
+                  background: #3498db;
+                  border-radius: 8px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                "
+              >
+                Test System
+              </div>
+            </div>
+            <div class="equipment-info">
+              <div class="equipment-name">
+                Rohde & Schwarz CMX500 Test System
+              </div>
+              <div class="equipment-price">1.43 ETH / day</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="view-all-btn">View All Equipments</button>
+      </section>
+    </main>
+
+    <script>
+      // Add interactivity
+      document.querySelectorAll(".category-card").forEach((card) => {
+        card.addEventListener("click", function () {
+          document
+            .querySelectorAll(".category-card")
+            .forEach((c) => c.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+
+      // Search functionality
+      document
+        .querySelector(".search-box button")
+        .addEventListener("click", function () {
+          const searchTerm = document.querySelector(".search-box input").value;
+          console.log("Searching for:", searchTerm);
+          // Add search logic here
+        }); // Action buttons
+      document.querySelectorAll(".action-btn").forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          const action = this.textContent.trim();
+          console.log("Action clicked:", action);
+          // Add action logic here
+        });
+      });
+
+      // Equipment card clicks
+      document.querySelectorAll(".equipment-card").forEach((card) => {
+        card.addEventListener("click", function () {
+          const equipmentName =
+            this.querySelector(".equipment-name").textContent;
+          console.log("Viewing details for:", equipmentName);
+
+          // Navigate to equipment details for specific items
+          if (equipmentName.includes("Formlabs Form 3L")) {
+            window.location.href = "equipment-details.html";
+          } else {
+            // For other equipment, show placeholder
+            alert(`Details for ${equipmentName} would be shown here.`);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

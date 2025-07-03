@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SciQuipShar - Profile</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* Header */
+      .header {
+        background: white;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #28a745;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #666;
+        font-weight: 500;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: #28a745;
+      }
+
+      /* Main Container */
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+      }
+
+      .page-title {
+        text-align: center;
+        font-size: 3rem;
+        color: #28a745;
+        margin-bottom: 3rem;
+        font-weight: 300;
+      }
+
+      /* Profile Section */
+      .profile-section {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 3rem;
+        align-items: flex-start;
+      }
+
+      .profile-avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 4px solid #28a745;
+        flex-shrink: 0;
+      }
+
+      .avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .profile-info {
+        flex: 1;
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .profile-name {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .profile-rating {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+        color: #666;
+      }
+
+      .profile-location {
+        color: #666;
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+      }
+
+      .register-equipment-btn {
+        background: #28a745;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .register-equipment-btn:hover {
+        background: #218838;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+      }
+
+      /* NFT Badges Section */
+      .nft-badges-section {
+        margin-bottom: 3rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: #333;
+      }
+
+      .badges-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .badge-card {
+        background: #28a745;
+        color: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+      }
+
+      .badge-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .badge-title {
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      /* Recent Reviews Section */
+      .reviews-section {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        margin-bottom: 2rem;
+      }
+
+      .review-item {
+        border-left: 4px solid #28a745;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1rem;
+        background: #f8f9fa;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .review-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .review-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .review-points {
+        font-weight: 600;
+        color: #28a745;
+      }
+
+      .reviewer-name {
+        font-weight: 600;
+        color: #333;
+      }
+
+      .review-text {
+        color: #666;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .review-meta {
+        color: #999;
+        font-size: 0.85rem;
+      }
+
+      .see-full-ranking-btn {
+        width: 100%;
+        background: #28a745;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .see-full-ranking-btn:hover {
+        background: #218838;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .profile-section {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .badges-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .container {
+          padding: 2rem 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">SciQuipShar</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="catalogo.html">Catalog</a></li>
+          <li><a href="profile.html" class="active">Profile</a></li>
+          <li><a href="dashboard.html">My dashboard</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      <h1 class="page-title">Profile</h1>
+
+      <!-- Profile Information -->
+      <section class="profile-section">
+        <div class="profile-avatar">
+          <svg
+            class="avatar-img"
+            viewBox="0 0 200 200"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <!-- Avatar Background -->
+            <circle cx="100" cy="100" r="100" fill="#e3f2fd" />
+
+            <!-- Face -->
+            <circle cx="100" cy="80" r="35" fill="#ffdbac" />
+
+            <!-- Hair -->
+            <path
+              d="M65 55 Q100 30 135 55 Q135 40 120 35 Q100 25 80 35 Q65 40 65 55 Z"
+              fill="#f4c430"
+            />
+
+            <!-- Eyes -->
+            <circle cx="88" cy="75" r="3" fill="#333" />
+            <circle cx="112" cy="75" r="3" fill="#333" />
+
+            <!-- Nose -->
+            <ellipse cx="100" cy="85" rx="2" ry="3" fill="#ffb74d" />
+
+            <!-- Mouth -->
+            <path
+              d="M95 95 Q100 100 105 95"
+              stroke="#333"
+              stroke-width="2"
+              fill="none"
+            />
+
+            <!-- Body/Shirt -->
+            <rect x="70" y="120" width="60" height="80" rx="5" fill="#4caf50" />
+
+            <!-- Jacket/Blazer -->
+            <path d="M65 130 L75 125 L75 200 L65 200 Z" fill="#2c5530" />
+            <path d="M135 130 L125 125 L125 200 L135 200 Z" fill="#2c5530" />
+            <rect x="75" y="125" width="50" height="75" fill="#2c5530" />
+
+            <!-- Shirt collar -->
+            <polygon
+              points="85,125 100,135 115,125 105,130 95,130"
+              fill="#4caf50"
+            />
+          </svg>
+        </div>
+
+        <div class="profile-info">
+          <h2 class="profile-name">Lívia Corazza Ferrão</h2>
+          <div class="profile-rating">
+            <span>⭐</span>
+            <span>32 points (10 reviews)</span>
+          </div>
+          <div class="profile-location">
+            Federal University of Santa Catarina
+          </div>
+          <a href="register-equipment.html" class="register-equipment-btn"
+            >Register a new equipment</a
+          >
+        </div>
+      </section>
+
+      <!-- NFT Badges -->
+      <section class="nft-badges-section">
+        <h3 class="section-title">NFT Badges Earned</h3>
+        <div class="badges-grid">
+          <div class="badge-card">
+            <div class="badge-icon">🔬</div>
+            <div class="badge-title">Active Researcher</div>
+          </div>
+          <div class="badge-card">
+            <div class="badge-icon">🤝</div>
+            <div class="badge-title">Collaborator</div>
+          </div>
+          <div class="badge-card">
+            <div class="badge-icon">⭐</div>
+            <div class="badge-title">More than 30 points</div>
+          </div>
+          <div class="badge-card">
+            <div class="badge-icon">🏆</div>
+            <div class="badge-title">Top User</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Reviews -->
+      <section class="reviews-section">
+        <h3 class="section-title">Recent reviews</h3>
+
+        <div class="review-item">
+          <div class="review-header">
+            <span>⭐</span>
+            <span class="review-points">5 points</span>
+          </div>
+          <div class="reviewer-name">Prof. Carlos Lima</div>
+          <div class="review-text">
+            "Equipment in perfect condition, very responsible user."
+          </div>
+          <div class="review-meta">NMR Microscope • 15 Jun 2025</div>
+        </div>
+
+        <div class="review-item">
+          <div class="review-header">
+            <span>⭐</span>
+            <span class="review-points">5 points</span>
+          </div>
+          <div class="reviewer-name">Dr. Maria Santos</div>
+          <div class="review-text">
+            "Excellent communication and punctuality. The loaned equipment is
+            well maintained."
+          </div>
+          <div class="review-meta">FTiR Spectrometer • 12 Jun 2025</div>
+        </div>
+
+        <button class="see-full-ranking-btn">See full ranking</button>
+      </section>
+    </main>
+
+    <script>
+      // Add interactivity for buttons
+      document
+        .querySelector(".see-full-ranking-btn")
+        .addEventListener("click", function () {
+          alert(
+            "Full ranking feature would be implemented here.\nShowing detailed review history..."
+          );
+        });
+    </script>
+  </body>
+</html>

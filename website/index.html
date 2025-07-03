@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SciQuipShar - Scientific Equipment Sharing Platform</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+
+      .welcome-container {
+        text-align: center;
+        max-width: 600px;
+        padding: 3rem;
+      }
+
+      .logo {
+        font-size: 4rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .tagline {
+        font-size: 1.5rem;
+        margin-bottom: 3rem;
+        opacity: 0.9;
+        font-weight: 300;
+      }
+
+      .enter-btn {
+        display: inline-block;
+        padding: 1rem 2.5rem;
+        background: white;
+        color: #28a745;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      }
+
+      .enter-btn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .features {
+        margin-top: 3rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        opacity: 0.8;
+      }
+
+      .feature {
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    </style>
+    <script>
+      // Auto-redirect after 3 seconds if user doesn't click
+      setTimeout(() => {
+        window.location.href = "catalogo.html";
+      }, 5000);
+    </script>
+  </head>
+  <body>
+    <div class="welcome-container">
+      <h1 class="logo">SciQuipShar</h1>
+      <p class="tagline">Scientific Equipment Sharing Platform</p>
+      <a href="catalogo.html" class="enter-btn">Enter Platform</a>
+
+      <div class="features">
+        <div class="feature">
+          <span>🔬</span>
+          <span>Share Equipment</span>
+        </div>
+        <div class="feature">
+          <span>📅</span>
+          <span>Easy Booking</span>
+        </div>
+        <div class="feature">
+          <span>⭐</span>
+          <span>Reputation System</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

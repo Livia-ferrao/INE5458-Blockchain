@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SciQuipShar - Formlabs Form 3L 3D Printer</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* Header */
+      .header {
+        background: white;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #28a745;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: #666;
+        font-weight: 500;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: #28a745;
+      }
+
+      /* Main Container */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      /* Equipment Detail Layout */
+      .equipment-detail {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        margin-top: 2rem;
+      }
+
+      /* Image Section */
+      .equipment-image-section {
+        background: white;
+        border-radius: 16px;
+        padding: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      }
+
+      .equipment-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+      }
+
+      /* Equipment Info Section */
+      .equipment-info-section {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .equipment-title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+
+      .equipment-price {
+        font-size: 1.5rem;
+        color: #28a745;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .equipment-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        color: #666;
+      }
+
+      .meta-icon {
+        width: 16px;
+        height: 16px;
+        color: #28a745;
+      }
+
+      .equipment-description {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #555;
+        margin: 1.5rem 0;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .btn-primary {
+        flex: 1;
+        padding: 1rem 2rem;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        background: #218838;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(40, 167, 69, 0.3);
+      }
+
+      .btn-secondary {
+        width: 56px;
+        height: 56px;
+        background: white;
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1.2rem;
+      }
+
+      .btn-secondary:hover {
+        border-color: #28a745;
+        color: #28a745;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Specifications Section */
+      .specifications {
+        margin-top: 3rem;
+        grid-column: 1 / -1;
+      }
+
+      .spec-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: #333;
+      }
+
+      .spec-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .spec-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .spec-card h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .spec-list {
+        list-style: none;
+      }
+
+      .spec-list li {
+        padding: 0.25rem 0;
+        font-size: 0.95rem;
+        color: #666;
+      }
+
+      .spec-list li strong {
+        color: #333;
+        margin-right: 0.5rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .equipment-detail {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .container {
+          padding: 1rem;
+        }
+
+        .equipment-title {
+          font-size: 1.5rem;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+        }
+
+        .btn-secondary {
+          width: 100%;
+          height: 48px;
+        }
+      }
+
+      /* Back Button */
+      .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #666;
+        text-decoration: none;
+        font-weight: 500;
+        margin-bottom: 2rem;
+        transition: color 0.3s ease;
+      }
+
+      .back-button:hover {
+        color: #28a745;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">SciQuipShar</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="catalogo.html">Catalog</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="dashboard.html">My dashboard</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      <a href="catalogo.html" class="back-button"> ← Back to Catalog </a>
+
+      <div class="equipment-detail">
+        <!-- Equipment Image -->
+        <div class="equipment-image-section">
+          <svg
+            class="equipment-image"
+            width="400"
+            height="300"
+            viewBox="0 0 400 300"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <!-- 3D Printer Base -->
+            <rect
+              x="50"
+              y="200"
+              width="300"
+              height="80"
+              rx="8"
+              fill="#4a5568"
+            />
+            <rect
+              x="60"
+              y="190"
+              width="280"
+              height="20"
+              rx="4"
+              fill="#2d3748"
+            />
+
+            <!-- Orange Enclosure -->
+            <path
+              d="M80 60 L320 60 Q340 60 340 80 L340 180 Q340 200 320 200 L80 200 Q60 200 60 180 L60 80 Q60 60 80 60 Z"
+              fill="#fd7f28"
+            />
+            <path
+              d="M80 60 L320 60 Q340 60 340 80 L340 100 L60 100 L60 80 Q60 60 80 60 Z"
+              fill="#f56500"
+            />
+
+            <!-- Window -->
+            <rect
+              x="80"
+              y="80"
+              width="240"
+              height="100"
+              rx="8"
+              fill="#ff6b35"
+              opacity="0.8"
+            />
+            <rect
+              x="90"
+              y="90"
+              width="220"
+              height="80"
+              rx="4"
+              fill="#ff4500"
+              opacity="0.6"
+            />
+
+            <!-- Build Platform inside -->
+            <rect
+              x="140"
+              y="140"
+              width="120"
+              height="20"
+              rx="2"
+              fill="#2d3748"
+            />
+            <rect
+              x="150"
+              y="130"
+              width="100"
+              height="10"
+              rx="1"
+              fill="#4a5568"
+            />
+
+            <!-- Print Model (small object) -->
+            <rect
+              x="180"
+              y="125"
+              width="40"
+              height="15"
+              rx="2"
+              fill="#8b4513"
+            />
+
+            <!-- Control Panel -->
+            <rect
+              x="280"
+              y="220"
+              width="40"
+              height="25"
+              rx="4"
+              fill="#2d3748"
+            />
+            <circle cx="300" cy="232" r="3" fill="#28a745" />
+
+            <!-- Formlabs Logo Area -->
+            <rect
+              x="150"
+              y="245"
+              width="100"
+              height="15"
+              rx="2"
+              fill="#ffffff"
+            />
+            <text
+              x="200"
+              y="255"
+              text-anchor="middle"
+              font-family="Arial"
+              font-size="8"
+              fill="#2d3748"
+            >
+              Formlabs
+            </text>
+          </svg>
+        </div>
+
+        <!-- Equipment Information -->
+        <div class="equipment-info-section">
+          <div>
+            <h1 class="equipment-title">Formlabs Form 3L 3D Printer</h1>
+            <div class="equipment-price">0.031 ETH / day</div>
+          </div>
+
+          <div class="equipment-meta">
+            <div class="meta-item">
+              <span class="meta-icon">🏛️</span>
+              <span>Stanford University (EUA)</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-icon">👨‍🔧</span>
+              <span>Allocated technician: Technician 1</span>
+            </div>
+          </div>
+
+          <div class="equipment-description">
+            SLA (stereolithography) additive manufacturing equipment with a
+            build area of 335 × 200 × 300 mm, resolution of 25-100 μm and
+            compatibility with technical resins (standard, flexible and
+            biocompatible). Uses a dual Light Processing Unit (LPU) system for
+            high precision and automated part support. Ideal for rapid
+            prototyping, molds and industrial components. Operation via PreForm
+            software, with remote file sending, but requires on-site handling
+            for resin loading and part removal.
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn-primary">Book equipment</button>
+            <button class="btn-secondary">❤️</button>
+          </div>
+        </div>
+
+        <!-- Specifications -->
+        <div class="specifications">
+          <h3 class="spec-title">Technical Specifications</h3>
+          <div class="spec-grid">
+            <div class="spec-card">
+              <h4>Build Specifications</h4>
+              <ul class="spec-list">
+                <li><strong>Build Volume:</strong> 335 × 200 × 300 mm</li>
+                <li><strong>Layer Resolution:</strong> 25-100 μm</li>
+                <li><strong>Technology:</strong> Stereolithography (SLA)</li>
+                <li><strong>Light Source:</strong> Dual LPU System</li>
+              </ul>
+            </div>
+
+            <div class="spec-card">
+              <h4>Material Compatibility</h4>
+              <ul class="spec-list">
+                <li>
+                  <strong>Standard Resins:</strong> Clear, White, Black, Grey
+                </li>
+                <li>
+                  <strong>Flexible Resins:</strong> Elastic 50A, Flexible 80A
+                </li>
+                <li>
+                  <strong>Biocompatible:</strong> BioMed Clear, Surgical Guide
+                </li>
+                <li><strong>Engineering:</strong> Tough 2000, Durable</li>
+              </ul>
+            </div>
+
+            <div class="spec-card">
+              <h4>Operation & Software</h4>
+              <ul class="spec-list">
+                <li><strong>Software:</strong> PreForm (Formlabs)</li>
+                <li><strong>Connectivity:</strong> Wi-Fi, Ethernet, USB</li>
+                <li><strong>Remote Monitoring:</strong> Yes</li>
+                <li><strong>Auto Support:</strong> Yes</li>
+              </ul>
+            </div>
+
+            <div class="spec-card">
+              <h4>Physical Specifications</h4>
+              <ul class="spec-list">
+                <li><strong>Dimensions:</strong> 575 × 375 × 750 mm</li>
+                <li><strong>Weight:</strong> 60 kg</li>
+                <li><strong>Power:</strong> 100-240V, 50-60Hz</li>
+                <li><strong>Operating Temp:</strong> 18-28°C</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Book equipment functionality
+      document
+        .querySelector(".btn-primary")
+        .addEventListener("click", function () {
+          alert(
+            "Booking functionality would be implemented here.\nRedirecting to booking form..."
+          );
+          // Here you would implement the actual booking logic
+        });
+
+      // Favorite functionality
+      document
+        .querySelector(".btn-secondary")
+        .addEventListener("click", function () {
+          const heart = this.textContent;
+          if (heart === "❤️") {
+            this.textContent = "💔";
+            this.style.color = "#dc3545";
+          } else {
+            this.textContent = "❤️";
+            this.style.color = "#e91e63";
+          }
+        });
+    </script>
+  </body>
+</html>

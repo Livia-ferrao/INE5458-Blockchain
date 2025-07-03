@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SciQuipShar - Dashboard</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* Header */
+      .header {
+        background: white;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #28a745;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #666;
+        font-weight: 500;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: #28a745;
+      }
+
+      /* Main Container */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+      }
+
+      .page-title {
+        text-align: center;
+        font-size: 3rem;
+        color: #28a745;
+        margin-bottom: 3rem;
+        font-weight: 300;
+      }
+
+      /* Stats Grid */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .stat-card {
+        background: #28a745;
+        color: white;
+        padding: 2rem;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 0 8px 24px rgba(40, 167, 69, 0.3);
+        transition: transform 0.3s ease;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-4px);
+      }
+
+      .stat-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        font-size: 1.5rem;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        font-size: 1rem;
+        font-weight: 500;
+        opacity: 0.9;
+      }
+
+      /* Dashboard Content */
+      .dashboard-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2rem;
+      }
+
+      .content-section {
+        background: white;
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: #333;
+      }
+
+      /* Recent Bookings */
+      .booking-item {
+        border-left: 4px solid #28a745;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1rem;
+        background: #f8f9fa;
+        border-radius: 0 8px 8px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .booking-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .booking-info h4 {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.25rem;
+      }
+
+      .booking-date {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .booking-status {
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .status-in-use {
+        background: #28a745;
+        color: white;
+      }
+
+      .status-available {
+        background: #17a2b8;
+        color: white;
+      }
+
+      /* Reputation Section */
+      .reputation-list {
+        list-style: none;
+      }
+
+      .reputation-list li {
+        padding: 0.75rem 0;
+        color: #666;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .reputation-list li::before {
+        content: "✓";
+        color: #28a745;
+        font-weight: bold;
+      }
+
+      .reputation-question {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .dashboard-content {
+          grid-template-columns: 1fr;
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .container {
+          padding: 2rem 1rem;
+        }
+
+        .page-title {
+          font-size: 2rem;
+        }
+
+        .booking-item {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">SciQuipShar</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="catalogo.html">Catalog</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="dashboard.html" class="active">My dashboard</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      <h1 class="page-title">Dashboard</h1>
+
+      <!-- Statistics Cards -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">🔬</div>
+          <div class="stat-number">12</div>
+          <div class="stat-label">Registered equipment</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">📅</div>
+          <div class="stat-number">8</div>
+          <div class="stat-label">Bookings this month</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">💰</div>
+          <div class="stat-number">$2400</div>
+          <div class="stat-label">Revenue generated</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">⭐</div>
+          <div class="stat-number">32</div>
+          <div class="stat-label">Average rating</div>
+        </div>
+      </section>
+
+      <!-- Dashboard Content -->
+      <div class="dashboard-content">
+        <!-- Recent Bookings -->
+        <section class="content-section">
+          <h3 class="section-title">Recent bookings</h3>
+
+          <div class="booking-item">
+            <div class="booking-info">
+              <h4>Electron Microscope</h4>
+              <div class="booking-date">20 Jun 2025 • Today</div>
+            </div>
+            <span class="booking-status status-in-use">In use</span>
+          </div>
+
+          <div class="booking-item">
+            <div class="booking-info">
+              <h4>Dell Precision 7865 Workstation</h4>
+              <div class="booking-date">03 Jun 2025</div>
+            </div>
+            <span class="booking-status status-available">Available</span>
+          </div>
+        </section>
+
+        <!-- Reputation -->
+        <section class="content-section">
+          <h3 class="section-title">Reputation</h3>
+
+          <div class="reputation-question">💡 How to gain more reputation?</div>
+
+          <ul class="reputation-list">
+            <li>Use equipment responsibly</li>
+            <li>Leave helpful comments</li>
+            <li>Receive good reviews</li>
+            <li>Make frequent reservations</li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      // Add interactivity for dashboard elements
+      document.querySelectorAll(".stat-card").forEach((card) => {
+        card.addEventListener("click", function () {
+          const label = this.querySelector(".stat-label").textContent;
+          console.log(`Clicked on: ${label}`);
+          // Here you could navigate to detailed views
+        });
+      });
+
+      // Add click handlers for booking items
+      document.querySelectorAll(".booking-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          const equipmentName = this.querySelector("h4").textContent;
+          console.log(`Viewing details for: ${equipmentName}`);
+          // Here you could navigate to equipment details
+          if (equipmentName.includes("Electron")) {
+            window.location.href = "equipment-details.html";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

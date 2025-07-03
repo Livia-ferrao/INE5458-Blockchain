@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SciQuipShar - Register Equipment</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* Header */
+      .header {
+        background: white;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #28a745;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #666;
+        font-weight: 500;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: #28a745;
+      }
+
+      /* Main Container */
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+      }
+
+      .page-title {
+        text-align: center;
+        font-size: 2rem;
+        color: #333;
+        margin-bottom: 3rem;
+        font-weight: 600;
+      }
+
+      /* Form Styles */
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #333;
+        font-size: 0.95rem;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+        background: white;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #28a745;
+        box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+      }
+
+      .form-select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 1rem;
+        background: white;
+        cursor: pointer;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-select:focus {
+        outline: none;
+        border-color: #28a745;
+        box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+      }
+
+      .form-textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 1rem;
+        resize: vertical;
+        min-height: 120px;
+        font-family: inherit;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-textarea:focus {
+        outline: none;
+        border-color: #28a745;
+        box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+      }
+
+      .register-btn {
+        width: 100%;
+        padding: 16px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+      }
+
+      .register-btn:hover {
+        background: #218838;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(40, 167, 69, 0.3);
+      }
+
+      .register-btn:active {
+        transform: translateY(0);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .container {
+          padding: 2rem 1rem;
+        }
+
+        .page-title {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">SciQuipShar</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="catalogo.html">Catalog</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="dashboard.html">My dashboard</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      <h1 class="page-title">Register an equipment</h1>
+
+      <form id="registerForm">
+        <div class="form-group">
+          <label class="form-label" for="equipmentName">Equipment Name</label>
+          <input
+            type="text"
+            id="equipmentName"
+            class="form-input"
+            placeholder="Ex: Scanning electron microscope"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="modelBrand">Model/Brand</label>
+          <input
+            type="text"
+            id="modelBrand"
+            class="form-input"
+            placeholder="Ex: JEOL JSM-7100F"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="category">Category</label>
+          <select id="category" class="form-select" required>
+            <option value="">Select a category</option>
+            <option value="mathematics">Mathematics</option>
+            <option value="computing">Computing</option>
+            <option value="science">Science</option>
+            <option value="geography">Geography</option>
+            <option value="engineering">Engineering</option>
+            <option value="physical" selected>Physical</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="location">Location</label>
+          <input
+            type="text"
+            id="location"
+            class="form-input"
+            placeholder="Ex: Federal University of Santa Catarina"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="valuePerHour">Value Per Hour</label>
+          <input
+            type="number"
+            id="valuePerHour"
+            class="form-input"
+            placeholder="Ex: 0.35"
+            step="0.001"
+            min="0"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="technician">Allocate Technician</label>
+          <select id="technician" class="form-select" required>
+            <option value="">Select a technician</option>
+            <option value="technician1" selected>Technician 1</option>
+            <option value="technician2">Technician 2</option>
+            <option value="technician3">Technician 3</option>
+            <option value="technician4">Technician 4</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="description"
+            >Description And Specification</label
+          >
+          <textarea
+            id="description"
+            class="form-textarea"
+            placeholder="Enter detailed description and technical specifications of the equipment..."
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="register-btn">Register</button>
+      </form>
+    </main>
+
+    <script>
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Get form data
+          const formData = {
+            equipmentName: document.getElementById("equipmentName").value,
+            modelBrand: document.getElementById("modelBrand").value,
+            category: document.getElementById("category").value,
+            location: document.getElementById("location").value,
+            valuePerHour: document.getElementById("valuePerHour").value,
+            technician: document.getElementById("technician").value,
+            description: document.getElementById("description").value,
+          };
+
+          // Simulate form submission
+          console.log("Equipment registered:", formData);
+          alert(
+            "Equipment registered successfully!\nRedirecting to dashboard..."
+          );
+
+          // In a real app, you would send this data to your backend
+          // For now, we'll just redirect to the dashboard
+          window.location.href = "dashboard.html";
+        });
+    </script>
+  </body>
+</html>
